@@ -9,7 +9,7 @@
 ## handmal_onlymani  
 : train kinova+anymal to only manipulation  
 
-## handmal_onlymani  
+## handmal_onlymani_attention  
 : train kinova+anymal to only manipulation + attention method  
 
 ## Locomanipulation  
