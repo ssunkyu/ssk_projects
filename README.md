@@ -1,7 +1,7 @@
 # ssk_projects
 
 ## handmal_mix_advantages  
-: uncompleted  
+: train kinoval+anymal to locomotion+manipulation using mixing advantages   
 
 ## handmal_onlyloco  
 : train kinova+anymal to only locomotion  
