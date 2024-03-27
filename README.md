@@ -1,4 +1,4 @@
-# ssk_project
+# ssk_projects
 
 ## handmal_mix_advantages  
 : uncompleted  
