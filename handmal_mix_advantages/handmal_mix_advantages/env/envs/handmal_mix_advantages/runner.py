@@ -160,7 +160,7 @@ for update in range(1000000):
 
     actor.update()
     # actor.distribution.enforce_minimum_std((torch.ones(12)*0.2).to(device))
-    actor.distribution.enforce_minimum_std(torch.tensor([[[0.15, 0.25, 0.25] * 4 + [0.2] * 3 + [0.05] * 3]]).to(device))
+    actor.distribution.enforce_minimum_std(torch.tensor([0.15, 0.25, 0.25] * 4 + [0.2] * 3 + [0.2] * 3).to(device))
     # actor.distribution.enforce_minimum_std((torch.ones(18)*0.2).to(device))
     # curriculum update. Implement it in Environment.hpp
     env.curriculum_callback()

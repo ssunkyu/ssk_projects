@@ -32,9 +32,9 @@ class Actor:
         return self.architecture(torch.from_numpy(obs).to(self.device))
 
     def save_deterministic_graph(self, file_name, example_input, device='cpu'):
-        transferred_graph = torch.jit.trace(self.architecture.architecture.to(device), example_input)
+        transferred_graph = torch.jit.trace(self.architecture.to(device), example_input)
         torch.jit.save(transferred_graph, file_name)
-        self.architecture.architecture.to(self.device)
+        self.architecture.to(self.device)
 
     def deterministic_parameters(self):
         return self.architecture.parameters()
@@ -72,7 +72,6 @@ class Critic:
     @property
     def obs_shape(self):
         return self.architecture.input_shape
-
 
 class Actor_MLP(nn.Module):
     def __init__(self, hidden_dims, leg_hidden_dims, arm_hidden_dims, priv_encoder_dims, activation_fn,
@@ -235,12 +234,13 @@ class MultivariateGaussianDiagonalCovariance(nn.Module):
         self.distribution = None
         self.fast_sampler = fast_sampler
         self.fast_sampler.seed(seed)
-        self.samples = np.zeros([size, self.dim], dtype=np.float32)
+        self.samples = np.zeros([size, num_leg_actions+num_arm_actions], dtype=np.float32)
         self.logprob = np.zeros(size, dtype=np.float32)
         self.std_np = self.std.detach().cpu().numpy()
 
     def update(self):
         self.std_np = self.std.detach().cpu().numpy()
+
     def sample(self, logits):
         self.fast_sampler.sample(logits, self.std_np, self.samples, self.logprob)
         return self.samples.copy(), self.logprob.copy()

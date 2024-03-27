@@ -121,6 +121,6 @@ architecture:
   leg_hidden_dims : [128, 128]
   arm_hidden_dims : [128, 128]
 
-  priv_encoder_dims : [64, 25]
+  priv_encoder_dims : []
 
 test: false
