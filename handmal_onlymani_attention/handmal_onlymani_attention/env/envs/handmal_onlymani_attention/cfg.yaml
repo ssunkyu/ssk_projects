@@ -1,0 +1,59 @@
+seed: 1
+record_video: yes
+environment:
+  render: True
+# just testing commenting
+  num_envs: 200
+  save_rewards: 250
+  eval_every_n: 500
+  num_threads: 200
+  simulation_dt: 0.0025
+  control_dt: 0.01
+  max_time: 10.0
+  action_std: 0.1 # 0.3
+  curriculumFactor: 0.2
+  curriculumDecay: 0.997
+  eef_linvel: 0.3
+  eef_angvel: 0.8
+  clearance: 0.09
+##########################
+  reward:
+#    linvel:
+#      coeff: 9.0 # 6.0
+#    angvel:
+#      coeff: 4.0 # 4.0
+    cmdposition:
+      coeff: 6.0 # 4.0
+#    cmdorientation:
+#      coeff: 2.0
+#    cmddirection:
+#      coeff: 4.0
+    airtime:
+      coeff: 0.3 # 0.3
+  ##########################
+    footclearance:
+      coeff: -20.0 # -20.0
+    footslip:
+      coeff: -0.3 # -0.2
+#    ori:
+#      coeff: -4.0 # -3.0
+    jtorque:
+      coeff: -2e-04 #-3e-04
+    jposition:
+      coeff: -0.4 # -0.4
+    jspeed:
+      coeff: -0.04 # -6e-04
+    jacc:
+      coeff: -0.02 # -0.02
+    actsmooth1:
+      coeff: -1.0 # -0.25
+    actsmooth2:
+      coeff: -0.5 # -0.12
+    base:
+      coeff: -0.75 # -0.75
+##########################
+architecture:
+  policy_net: [512, 128]
+  value_net: [512, 128]
+
+test: false

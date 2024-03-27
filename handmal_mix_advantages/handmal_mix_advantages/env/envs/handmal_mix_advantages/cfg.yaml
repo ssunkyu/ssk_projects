@@ -1,0 +1,126 @@
+seed: 1
+record_video: yes
+environment:
+  render: True
+# just testing commenting
+  num_envs: 200
+  save_rewards: 100
+  eval_every_n: 500
+  num_threads: 50
+  simulation_dt: 0.0025
+  control_dt: 0.01
+  max_time: 4.0
+  action_std: 0.1 # 0.3
+  curriculumFactor: 0.2
+  curriculumDecay: 0.997
+  traj_time_upper: 3
+  traj_time_lower: 1
+  hold_time_upper: 2
+  hold_time_lower: 0.5
+  lin_vel_x_schedule_upper: 1000
+  lin_vel_x_schedule_lower: 0
+  ang_vel_yaw_schedule_upper: 1000
+  ang_vel_yaw_schedule_lower: 0
+  goal_ee_l_schedule_upper: 1000
+  goal_ee_l_schedule_lower: 0
+  goal_ee_p_schedule_upper: 1000
+  goal_ee_p_schedule_lower: 0
+  goal_ee_y_schedule_upper: 1000
+  goal_ee_y_schedule_lower: 0
+  init_lin_vel_x_ranges_upper: 0.5
+  init_lin_vel_x_ranges_lower: 0.0
+  final_lin_vel_x_ranges_upper: 1.2
+  final_lin_vel_x_ranges_lower: 0.0
+  init_ang_vel_yaw_ranges_upper: 0.0
+  init_ang_vel_yaw_ranges_lower: 0.0
+  final_ang_vel_yaw_ranges_upper: 1.0
+  final_ang_vel_yaw_ranges_lower: -1.0
+  init_goal_ee_l_ranges_upper: 0.6
+  init_goal_ee_l_ranges_lower: 0.6
+  final_goal_ee_l_ranges_upper: 0.6
+  final_goal_ee_l_ranges_lower: 0.2
+  init_goal_ee_p_ranges_upper: 0.25
+  init_goal_ee_p_ranges_lower: 0.25
+  final_goal_ee_p_ranges_upper: 0.4
+  final_goal_ee_p_ranges_lower: 0.4
+  init_goal_ee_y_ranges_upper: 0.166667
+  init_goal_ee_y_ranges_lower: -0.166667
+  final_goal_ee_y_ranges_upper: 0.6
+  final_goal_ee_y_ranges_lower: -0.6
+  init_ee_l_ranges_upper: 0.5
+  init_ee_l_ranges_lower: 0.3
+  init_ee_p_ranges_upper: 0.75
+  init_ee_p_ranges_lower: 0.25
+  init_ee_y_ranges_upper: 0.0
+  init_ee_y_ranges_lower: 0.0
+  goal_ee_delta_orn_l_ranges_upper: 0.0
+  goal_ee_delta_orn_l_ranges_lower: 0.0
+  goal_ee_delta_orn_p_ranges_upper: 0.0
+  goal_ee_delta_orn_p_ranges_lower: 0.0
+  goal_ee_delta_orn_y_ranges_upper: 0.0
+  goal_ee_delta_orn_y_ranges_lower: 0.0
+  # reward coefficients
+  reward:
+    # leg coeff
+    orientation:
+      coeff: -0.4
+    torque:
+      coeff: -6e-04 #-3e-04
+    dof_pos:
+      coeff: -0.015 # -0.4
+    dof_vel:
+      coeff: -1e-04 # -6e-04
+    dof_acc:
+      coeff: -3.e-4 # -0.02
+    tracking_lin_vel_xy_exp:
+      coeff: 3.0
+    tracking_ang_vel_exp:
+      coeff: 3.0
+    foot_contacts_z:
+      coeff: -1.e-4
+    feet_air_time:
+      coeff: 0.5 # 0.3
+    foot_slip:
+      coeff: -0.1 # -0.2
+    foot_clearance:
+      coeff: -10.0 # -20.0
+    act_smooth1:
+      coeff: -0.06 # -0.25
+    act_smooth2:
+      coeff: -0.03 # -0.12
+    base_motion:
+      coeff: -0.75 # -0.75
+    # arm coeff
+  arm_reward:
+    arm_energy_abs_sum:
+      coeff: -2.e-3
+    arm_tracking_ee_sphere:
+      coeff: 3.0
+    arm_tracking_ee_orn:
+      coeff: 0.0
+    arm_dof_pos:
+      coeff: -0.015
+    arm_dof_vel:
+      coeff: -1.e-4
+    arm_dof_acc:
+      coeff: -3.e-4
+    arm_act_smooth1:
+      coeff: -0.06
+    arm_act_smooth2:
+      coeff: -0.03
+
+termination:
+  r_threshold: 0.5
+  p_threshold: 0.5
+  z_threshold: 0.20
+
+architecture:
+  actor_hidden_dims: [128]
+  critic_hidden_dims: [128]
+
+  leg_hidden_dims : [128, 128]
+  arm_hidden_dims : [128, 128]
+
+  priv_encoder_dims : [64, 25]
+
+test: false
